@@ -93,18 +93,21 @@ class Oauth2Authenticator extends AbstractAuthenticator
 
             $accessTokenBadge = new AccessTokenBadge($accessToken, $roles);
 
-            return new SelfValidatingPassport(new UserBadge($client->getUserIdentifier()), [$accessTokenBadge]);
+            return new SelfValidatingPassport(new UserBadge($user->getUserIdentifier()), [$accessTokenBadge]);
         } catch (OAuth2ServerException $e) {
             throw new AuthenticationException('OAuth2 authentication failed', 0, $e);
         }
     }
 
-    public function createAuthenticatedToken(PassportInterface $passport, string $firewallName): TokenInterface
+    public function createToken(Passport $passport, string $firewallName): TokenInterface
     {
         /** @var AccessTokenBadge $accessTokenBadge */
         $accessTokenBadge = $passport->getBadge(AccessTokenBadge::class);
         $token = new OAuthToken($accessTokenBadge->getRoles());
         $token->setToken($accessTokenBadge->getAccessToken()->getToken());
+        if (!empty($user = $accessTokenBadge->getAccessToken()->getUser())) {
+            $token->setUser($user);
+        }
 
         return $token;
     }
