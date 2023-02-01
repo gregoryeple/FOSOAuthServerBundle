@@ -26,5 +26,6 @@ This bundle is under the MIT license. See the complete license in the bundle:
 ## Credits
 
 - Arnaud Le Blanc, and [all contributors](https://github.com/gregoryeple/FOSOAuthServerBundle/contributors)
+- Forked from Klapaudius [FOSUserBundle fork](https://github.com/klapaudius/FOSOAuthServerBundle)
 - Inspired by [BazingaOAuthBundle](https://github.com/willdurand/BazingaOAuthServerBundle) and [FOSUserBundle](https://github.com/FriendsOfSymfony/FOSUserBundle)
 - Installation doc adapted from [FOSUserBundle](https://github.com/FriendsOfSymfony/FOSUserBundle) doc.
