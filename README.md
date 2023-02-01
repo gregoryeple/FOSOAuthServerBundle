@@ -1,8 +1,7 @@
 FOSOAuthServerBundle
 ====================
 
-#### Branches : 4.0 [![Build Status](https://app.travis-ci.com/gregoryeple/FOSOAuthServerBundle.svg?branch=4.0)](https://app.travis-ci.com/gregoryeple/FOSOAuthServerBundle.svg?branch=4.0) 3.0 [![Build Status](https://app.travis-ci.com/gregoryeple/FOSOAuthServerBundle.svg?branch=3.0)](https://app.travis-ci.com/gregoryeple/FOSOAuthServerBundle.svg?branch=3.0)
-
+[![Total Downloads](https://poser.pugx.org/gregoryeple/oauth-server-bundle/downloads.svg)](https://packagist.org/packages/gregoryeple/oauth-server-bundle)
 
 ## Documentation
 
@@ -26,6 +25,6 @@ This bundle is under the MIT license. See the complete license in the bundle:
 ## Credits
 
 - Arnaud Le Blanc, and [all contributors](https://github.com/gregoryeple/FOSOAuthServerBundle/contributors)
-- Forked from Klapaudius [FOSUserBundle fork](https://github.com/klapaudius/FOSOAuthServerBundle)
 - Inspired by [BazingaOAuthBundle](https://github.com/willdurand/BazingaOAuthServerBundle) and [FOSUserBundle](https://github.com/FriendsOfSymfony/FOSUserBundle)
 - Installation doc adapted from [FOSUserBundle](https://github.com/FriendsOfSymfony/FOSUserBundle) doc.
+- Forked from [Klapaudius' fork](https://github.com/klapaudius/FOSOAuthServerBundle) of [FOSOAuthServerBundle](https://github.com/FriendsOfSymfony/FOSOAuthServerBundle)
