@@ -25,11 +25,11 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Exception\AccountStatusException;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
+use Symfony\Component\Security\Core\Exception\LazyResponseException;
 use Symfony\Component\Security\Core\User\UserCheckerInterface;
 use Symfony\Component\Security\Http\Authenticator\AbstractAuthenticator;
 use Symfony\Component\Security\Http\Authenticator\Passport\Badge\UserBadge;
 use Symfony\Component\Security\Http\Authenticator\Passport\Passport;
-use Symfony\Component\Security\Http\Authenticator\Passport\PassportInterface;
 use Symfony\Component\Security\Http\Authenticator\Passport\SelfValidatingPassport;
 
 class Oauth2Authenticator extends AbstractAuthenticator
@@ -70,7 +70,6 @@ class Oauth2Authenticator extends AbstractAuthenticator
             $accessToken = $this->serverService->verifyAccessToken($tokenString);
 
             $user = $accessToken->getUser();
-            $client = $accessToken->getClient();
 
             if (null !== $user) {
                 try {
@@ -95,7 +94,7 @@ class Oauth2Authenticator extends AbstractAuthenticator
 
             return new SelfValidatingPassport(new UserBadge($user->getUserIdentifier()), [$accessTokenBadge]);
         } catch (OAuth2ServerException $e) {
-            throw new AuthenticationException('OAuth2 authentication failed', 0, $e);
+            throw new LazyResponseException($e->getHttpResponse());
         }
     }
 

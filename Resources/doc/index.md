@@ -32,13 +32,13 @@ Installation is a quick 5 steps process:
 ### Step 1: Install FOSOAuthServerBundle
 
 The preferred way to install this bundle is to rely on [Composer](http://getcomposer.org).
-Just check on [Packagist](http://packagist.org/packages/klapaudius/oauth-server-bundle) the version you want to install (in the following example, we used "dev-master") and add it to your `composer.json`:
+Just check on [Packagist](http://packagist.org/packages/gregoryeple/oauth-server-bundle) the version you want to install (in the following example, we used "dev-master") and add it to your `composer.json`:
 
 ``` js
 {
     "require": {
         // ...
-        "klapaudius/oauth-server-bundle": "dev-master"
+        "gregoryeple/oauth-server-bundle": "dev-master"
     }
 }
 ```
