@@ -26,6 +26,7 @@ use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Exception\AccountStatusException;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
 use Symfony\Component\Security\Core\Exception\LazyResponseException;
+use Symfony\Component\Security\Core\User\InMemoryUser;
 use Symfony\Component\Security\Core\User\UserCheckerInterface;
 use Symfony\Component\Security\Http\Authenticator\AbstractAuthenticator;
 use Symfony\Component\Security\Http\Authenticator\Passport\Badge\UserBadge;
@@ -79,20 +80,23 @@ class Oauth2Authenticator extends AbstractAuthenticator
                 }
             }
 
-            $roles = (null !== $user) ? $user->getRoles() : [];
+            $roles = (null !== $user) ? $user->getRoles() : ["ROLE_API"];
             $scope = $accessToken->getScope();
 
             if (!empty($scope)) {
                 foreach (explode(' ', $scope) as $role) {
-                    $roles[] = 'ROLE_'.mb_strtoupper($role);
+                    $roles[] = 'ROLE_' . mb_strtoupper($role);
                 }
             }
 
             $roles = array_unique($roles, SORT_REGULAR);
 
             $accessTokenBadge = new AccessTokenBadge($accessToken, $roles);
-
-            return new SelfValidatingPassport(new UserBadge($user->getUserIdentifier()), [$accessTokenBadge]);
+            if (null !== $user) {
+                return new SelfValidatingPassport(new UserBadge($user->getUserIdentifier()), [$accessTokenBadge]);
+            } else {
+                return new SelfValidatingPassport(new UserBadge("API", fn() => new InMemoryUser("API", null, $roles)), [$accessTokenBadge]);
+            }
         } catch (OAuth2ServerException $e) {
             throw new LazyResponseException($e->getHttpResponse());
         }
